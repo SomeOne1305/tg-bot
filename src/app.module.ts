@@ -3,7 +3,6 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { join } from 'path';
-import { Telegraf } from 'telegraf';
 import RedisSession from 'telegraf-session-redis';
 import { BotModule } from './modules/bot/bot.module';
 @Module({
@@ -19,21 +18,26 @@ import { BotModule } from './modules/bot/bot.module';
           },
         }).middleware(),
       ],
-      launchOptions:
-        process.env.NODE_ENV === 'production'
-          ? { webhook: { domain: process.env.VERCEL_URL, path: '/tg-bot' } }
-          : ({ polling: true } as Telegraf.LaunchOptions),
+      launchOptions: {
+        webhook: {
+          domain: process.env.VERCEL_URL,
+          path: '/tg-bot',
+          ipAddress: '76.76.21.22',
+          port: +process.env.PORT,
+        },
+        dropPendingUpdates: true,
+      },
     }),
     TypeOrmModule.forRootAsync({
       useFactory: async () => ({
         type: 'postgres',
-        host: 'localhost',
-        port: 5432,
-        username: 'postgres',
-        password: '12345678',
-        database: 'portfolio',
-        // url: 'postgres://default:BxeObYjM6H2g@ep-polished-wildflower-a4u5k8c3-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&charset=utf8',
-        // ssl: true,
+        // host: 'localhost',
+        // port: 5432,
+        // username: 'postgres',
+        // password: '12345678',
+        // database: 'portfolio',
+        url: 'postgres://default:BxeObYjM6H2g@ep-polished-wildflower-a4u5k8c3-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&charset=utf8',
+        ssl: true,
         entities: [join(__dirname, '**', '*.entity.{ts,js}')],
         synchronize: true,
       }),

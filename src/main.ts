@@ -5,7 +5,8 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(app.get<Telegraf>(getBotToken('/tg-bot')));
+  const bot = app.get<Telegraf>(getBotToken());
+  app.use(bot.webhookCallback('/tg-bot'));
   app.enableCors();
   await app.listen(8080 || process.env.PORT);
 }
