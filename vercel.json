@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/main.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "public": true,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "api/index.ts"
+    }
+  ],
+  "redirects": [{ "source": "/", "destination": "/api", "permanent": false }],
+  "installCommand": "pnpm install"
+}
