@@ -22,8 +22,6 @@ import { BotModule } from './modules/bot/bot.module';
         webhook: {
           domain: process.env.VERCEL_URL,
           path: '/tg-bot',
-          ipAddress: '76.76.21.22',
-          port: +process.env.PORT,
         },
         dropPendingUpdates: true,
       },

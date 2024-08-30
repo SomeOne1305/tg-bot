@@ -9,9 +9,9 @@
   "public": true,
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/tg-bot",
       "dest": "src/main.ts",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"]
+      "methods": ["GET", "POST"]
     }
   ],
   "installCommand": "pnpm install"
