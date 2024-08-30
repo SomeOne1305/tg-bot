@@ -8,7 +8,7 @@ async function bootstrap() {
   const bot = app.get<Telegraf>(getBotToken());
   app.use(bot.webhookCallback('/tg-bot'));
   app.enableCors();
-  await bot.launch();
+  // await bot.launch();
   await app.listen(8080 || process.env.PORT);
 }
 

@@ -1,5 +1,5 @@
-import { Action, Ctx, InjectBot, On, Start, Update } from 'nestjs-telegraf';
-import { Markup, Telegraf } from 'telegraf';
+import { Action, Ctx, On, Start, Update } from 'nestjs-telegraf';
+import { Markup } from 'telegraf';
 import { Message } from 'telegraf/typings/core/types/typegram';
 import { CreateUserDto } from '../../dtos/user.dto';
 import { TelegrafContext } from '../../interfaces';
@@ -10,15 +10,9 @@ import { BotUtils } from './bot.utils';
 @Update()
 export class BotUpdate {
   constructor(
-    @InjectBot() private readonly bot: Telegraf<TelegrafContext>,
     private actions: BotActions,
     private utils: BotUtils,
-  ) {
-    this.bot.createWebhook({
-      domain: 'dkoaskf',
-      max_connections: 1000,
-    });
-  }
+  ) {}
 
   @Start()
   async StartCommand(@Ctx() ctx: TelegrafContext) {

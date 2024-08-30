@@ -20,7 +20,8 @@ import { BotModule } from './modules/bot/bot.module';
       ],
       launchOptions: {
         webhook: {
-          domain: process.env.VERCEL_URL,
+          // domain: process.env.VERCEL_URL,
+          domain: 'https://my-portfolio-tg-bot.vercel.app',
           path: '/tg-bot',
         },
         dropPendingUpdates: true,
